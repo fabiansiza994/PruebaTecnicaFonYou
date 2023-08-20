@@ -31,11 +31,18 @@ public class CreateExamUseCase {
             throw new QuestionNotFound("Exam not contains Questions!!");
         }
 
-        proccessQuestion(examDto, exam.getId());
+        var rate = calculateRate(examDto.getQuestionDtoList().size());
+
+        proccessQuestion(examDto, exam.getId(), rate);
         return examDto;
     }
 
-    private void proccessQuestion(ExamDto examDto, Long id) {
+    public static double calculateRate(int questionCount) {
+        return 100.0/questionCount;
+    }
+
+    private void proccessQuestion(ExamDto examDto, Long id, Double rate) {
+
         examDto.getQuestionDtoList().forEach(questionDto -> {
             var question = new QuestionDto();
 
@@ -44,10 +51,12 @@ public class CreateExamUseCase {
 
             question.setQuestionName(questionDto.getQuestionName());
             question.setExamId(id);
+            question.setRate(rate);
 
             var questionDb = createQuestionUseCase.createQuestion(question);
             questionDto.setId(questionDb.getId());
             questionDto.setExamId(id);
+            questionDto.setRate(rate);
 
             if(questionDto.getAnswer().isEmpty()){
                 throw new AnswerNotFound("Exam not contains Answers!!");

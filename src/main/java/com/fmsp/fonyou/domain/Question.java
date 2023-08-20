@@ -29,6 +29,9 @@ public class Question implements Serializable {
     @JoinColumn(name = "exam_id")
     private Exam exam;
 
+    @Column(name = "rate")
+    private Double rate;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private List<Answer> answer;
 }
