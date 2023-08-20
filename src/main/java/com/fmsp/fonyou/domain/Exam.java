@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="student")
-public class Student implements Serializable {
+@Table(name="exam")
+public class Exam implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +24,6 @@ public class Student implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "age")
-    private Integer age;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "utc")
-    private String utc;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    private List<Question> question;
 }

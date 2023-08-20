@@ -6,15 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="student")
-public class Student implements Serializable {
+@Table(name="answer")
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +21,10 @@ public class Student implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "value")
+    private Boolean value;
 
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "utc")
-    private String utc;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id")
+    private Question question;
 }
