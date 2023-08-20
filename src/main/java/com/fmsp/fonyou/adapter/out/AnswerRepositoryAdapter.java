@@ -1,4 +1,4 @@
-package com.fmsp.fonyou.adapter;
+package com.fmsp.fonyou.adapter.out;
 
 import com.fmsp.fonyou.adapter.infrastucture.AnswerRepository;
 import com.fmsp.fonyou.application.dto.AnswerDto;
