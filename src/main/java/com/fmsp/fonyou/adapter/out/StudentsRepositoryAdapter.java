@@ -3,6 +3,7 @@ package com.fmsp.fonyou.adapter.out;
 import com.fmsp.fonyou.adapter.infrastucture.StudentsRepository;
 import com.fmsp.fonyou.application.dto.StudentDto;
 import com.fmsp.fonyou.application.port.StudentService;
+import com.fmsp.fonyou.config.exception.StudentNotFound;
 import com.fmsp.fonyou.domain.Student;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class StudentsRepositoryAdapter implements StudentService {
 
     private final StudentsRepository studentsRepository;
     private final ModelMapper modelMapper;
+    private static final String STUDENT_NOT_FOUND = "Estudiante no encontrado en el registro";
 
     public StudentsRepositoryAdapter(StudentsRepository studentsRepository, ModelMapper modelMapper) {
         this.studentsRepository = studentsRepository;
@@ -36,6 +38,8 @@ public class StudentsRepositoryAdapter implements StudentService {
     @Override
     public StudentDto getStudentById(Long studentId) {
         var student = studentsRepository.findById(studentId);
+        if(student.isEmpty())
+            throw new StudentNotFound(STUDENT_NOT_FOUND);
         return modelMapper.map(student, StudentDto.class);
     }
 }

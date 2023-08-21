@@ -15,6 +15,9 @@ public class CreateExamUseCase {
     private final ExamService examService;
     private final CreateQuestionUseCase createQuestionUseCase;
     private final CreateAnswerUseCase createAnswerUseCase;
+    private static final String EXAM_NOT_HAVE_QUESTIONS = "Exam not contains Questions!!";
+    private static final String QUESTION_NAME_IS_EMPTY = "Question Name is not Empty";
+    private static final String EXAM_NOT_HAVE_ANSWERS = "Exam not contains Answers!!";
 
     public CreateExamUseCase(ExamService examService, CreateQuestionUseCase createQuestionUseCase, CreateAnswerUseCase createAnswerUseCase) {
         this.examService = examService;
@@ -28,7 +31,7 @@ public class CreateExamUseCase {
         examDto.setId(exam.getId());
 
         if(examDto.getQuestionDtoList().isEmpty()){
-            throw new QuestionNotFound("Exam not contains Questions!!");
+            throw new QuestionNotFound(EXAM_NOT_HAVE_QUESTIONS);
         }
 
         var rate = calculateRate(examDto.getQuestionDtoList().size());
@@ -47,7 +50,7 @@ public class CreateExamUseCase {
             var question = new QuestionDto();
 
             if(questionDto.getQuestionName().isEmpty())
-                throw new QuestionNotFound("Question Name is not Empty");
+                throw new QuestionNotFound(QUESTION_NAME_IS_EMPTY);
 
             question.setQuestionName(questionDto.getQuestionName());
             question.setExamId(id);
@@ -59,7 +62,7 @@ public class CreateExamUseCase {
             questionDto.setRate(rate);
 
             if(questionDto.getAnswer().isEmpty()){
-                throw new AnswerNotFound("Exam not contains Answers!!");
+                throw new AnswerNotFound(EXAM_NOT_HAVE_ANSWERS);
             }
 
             proccessAnswer(questionDto, questionDb.getId());

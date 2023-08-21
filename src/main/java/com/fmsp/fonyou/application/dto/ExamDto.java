@@ -16,5 +16,6 @@ public class ExamDto {
     @Getter
     public static class ExamStudentDto extends ExamDto{
         private Long studentId;
+        private Long examId;
     }
 }

@@ -16,4 +16,19 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleQuestionNotFoundException(QuestionNotFound ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+    @ExceptionHandler(StudentNotHaveExam.class)
+    public ResponseEntity<String> handleStudentNotHaveExamException(StudentNotHaveExam ex) {
+        return ResponseEntity.status(HttpStatus.OK).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(StudentNotFound.class)
+    public ResponseEntity<String> handleStudentNotExistException(StudentNotFound ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ExamAlreadyAssigned.class)
+    public ResponseEntity<String> handleExamAlreadyAssignedException(ExamAlreadyAssigned ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
 }

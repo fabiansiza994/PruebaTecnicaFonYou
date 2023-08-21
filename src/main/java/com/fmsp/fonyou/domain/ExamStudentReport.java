@@ -32,4 +32,7 @@ public class ExamStudentReport {
     private Instant Date;
 
     private Double result;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean status;
 }

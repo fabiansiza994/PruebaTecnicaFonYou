@@ -14,4 +14,5 @@ public class ExamStudentReportDto {
     private Long examJson;
     private Instant date;
     private Double result;
+    private Boolean status;
 }
