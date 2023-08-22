@@ -213,4 +213,4 @@ API la cual recibe como parametro el studentId y el examId:
 
 > localhost:8001/api/exam/{**studentId**}/{**examId**} (**GET**)
 
-Mas informacion acerca de los endpoint (curl) estara disponible en el archivo [Fonyou.postman_collection](https://)
+Mas informacion acerca de los endpoint (curl) estara disponible en el archivo [Fonyou.postman_collection]([https://](https://github.com/fabiansiza994/PruebaTecnicaFonYou/blob/master/Fonyou.postman_collection.json)https://github.com/fabiansiza994/PruebaTecnicaFonYou/blob/master/Fonyou.postman_collection.json)
