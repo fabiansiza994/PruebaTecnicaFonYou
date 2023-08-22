@@ -31,4 +31,19 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleExamAlreadyAssignedException(ExamAlreadyAssigned ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
+
+    @ExceptionHandler(ErrorOnUpdate.class)
+    public ResponseEntity<String> handleErrorOnUpdateException(ErrorOnUpdate ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ExamNotAssigned.class)
+    public ResponseEntity<String> handleExamNotAssignedException(ExamNotAssigned ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ExamNotFound.class)
+    public ResponseEntity<String> handleExamNotFoundException(ExamNotFound ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
 }

@@ -2,6 +2,7 @@ package com.fmsp.fonyou.adapter.out;
 
 import com.fmsp.fonyou.adapter.infrastucture.ExamRepository;
 import com.fmsp.fonyou.application.dto.ExamDto;
+import com.fmsp.fonyou.application.dto.ExamListDto;
 import com.fmsp.fonyou.application.port.ExamService;
 import com.fmsp.fonyou.domain.Exam;
 import org.modelmapper.ModelMapper;
@@ -28,8 +29,13 @@ public class ExamRepositoryAdapter implements ExamService {
     }
 
     @Override
-    public List<ExamDto> getExamList() {
+    public List<ExamListDto> getExamList() {
         var examList = examRepository.findAll();
-        return examList.stream().map(exam -> modelMapper.map(exam, ExamDto.class)).collect(Collectors.toList());
+        return examList.stream().map(exam -> modelMapper.map(exam, ExamListDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ExamDto getExamById(Long examId) {
+        return modelMapper.map(examRepository.findById(examId), ExamDto.class);
     }
 }

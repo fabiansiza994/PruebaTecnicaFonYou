@@ -1,6 +1,6 @@
 package com.fmsp.fonyou.application.usecase;
 
-import com.fmsp.fonyou.application.dto.ExamStudentReportDto;
+import com.fmsp.fonyou.application.dto.ExamStudentAssignDto;
 import com.fmsp.fonyou.application.port.ExamStudentService;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class GetAllExamByStudentIdUseCase {
         this.examStudentService = examStudentService;
     }
 
-    public List<ExamStudentReportDto> getExamByStudentIdList(Long studentId){
+    public List<ExamStudentAssignDto> getExamByStudentIdList(Long studentId){
         return examStudentService.getExamByStudentIdList(studentId);
     }
 }

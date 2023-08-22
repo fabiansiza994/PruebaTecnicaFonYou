@@ -7,12 +7,10 @@ import java.time.Instant;
 
 @Setter
 @Getter
-public class ExamStudentReportDto {
-    private Long id;
+public class ExamStudentAssignDto {
     private Long studentId;
     private Long examId;
-    private String examJson;
     private Instant presentationDate;
-    private Double result;
     private Boolean status;
+
 }

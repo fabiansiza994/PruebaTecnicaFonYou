@@ -4,6 +4,7 @@ import com.fmsp.fonyou.application.dto.AnswerDto;
 import com.fmsp.fonyou.application.dto.ExamDto;
 import com.fmsp.fonyou.application.dto.QuestionDto;
 import com.fmsp.fonyou.application.port.ExamService;
+import com.fmsp.fonyou.config.CalculateRate;
 import com.fmsp.fonyou.config.exception.AnswerNotFound;
 import com.fmsp.fonyou.config.exception.QuestionNotFound;
 import org.springframework.stereotype.Service;
@@ -34,14 +35,10 @@ public class CreateExamUseCase {
             throw new QuestionNotFound(EXAM_NOT_HAVE_QUESTIONS);
         }
 
-        var rate = calculateRate(examDto.getQuestionDtoList().size());
+        var rate = CalculateRate.calculateRate(examDto.getQuestionDtoList().size());
 
         proccessQuestion(examDto, exam.getId(), rate);
         return examDto;
-    }
-
-    public static double calculateRate(int questionCount) {
-        return 100.0/questionCount;
     }
 
     private void proccessQuestion(ExamDto examDto, Long id, Double rate) {

@@ -23,4 +23,9 @@ public class AnswerRepositoryAdapter implements AnswerService {
         var answer = answerRepository.save(modelMapper.map(answerDto, Answer.class));
        return modelMapper.map(answer, AnswerDto.class);
     }
+
+    @Override
+    public AnswerDto findCorrectAnswer(Long questionId, Long answerId) {
+        return modelMapper.map(answerRepository.findByIdAndQuestion_Id(answerId, questionId), AnswerDto.class);
+    }
 }

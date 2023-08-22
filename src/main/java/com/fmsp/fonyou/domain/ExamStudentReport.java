@@ -26,10 +26,10 @@ public class ExamStudentReport {
     @Column(name = "exam_id")
     private Long examId;
 
-    @Column(name = "exam_json")
-    private Long examJson;
+    @Column(name = "exam_json", columnDefinition = "TEXT")
+    private String examJson;
 
-    private Instant Date;
+    private Instant presentationDate;
 
     private Double result;
 

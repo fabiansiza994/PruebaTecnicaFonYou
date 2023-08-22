@@ -1,7 +1,9 @@
 package com.fmsp.fonyou.adapter.out;
 
 import com.fmsp.fonyou.adapter.infrastucture.ExamStudentRepository;
-import com.fmsp.fonyou.application.dto.ExamProjection;
+import com.fmsp.fonyou.application.dto.ExamAnswerDto;
+import com.fmsp.fonyou.application.dto.ExamProjectionDto;
+import com.fmsp.fonyou.application.dto.ExamStudentAssignDto;
 import com.fmsp.fonyou.application.dto.ExamStudentReportDto;
 import com.fmsp.fonyou.application.port.ExamStudentService;
 import com.fmsp.fonyou.config.exception.StudentNotHaveExam;
@@ -25,11 +27,11 @@ public class ExamStudentRepositoryAdapter implements ExamStudentService {
     }
 
     @Override
-    public List<ExamStudentReportDto> getExamByStudentIdList(Long studentId) {
+    public List<ExamStudentAssignDto> getExamByStudentIdList(Long studentId) {
         var examList = examStudentRepository.findAllByStudentId(studentId);
         if(examList.isEmpty())
             throw new StudentNotHaveExam(STUDENT_NOT_HAVE_EXAMS);
-        return examList.stream().map(student -> modelMapper.map(student, ExamStudentReportDto.class)).collect(Collectors.toList());
+        return examList.stream().map(student -> modelMapper.map(student, ExamStudentAssignDto.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -39,7 +41,17 @@ public class ExamStudentRepositoryAdapter implements ExamStudentService {
     }
 
     @Override
-    public List<ExamProjection> getExamStudent(Long studentId, Long examId) {
+    public List<ExamProjectionDto> getExamStudent(Long studentId, Long examId) {
         return examStudentRepository.getExamStudent(studentId, examId);
+    }
+
+    @Override
+    public ExamAnswerDto getExamStudentAnswer(Long studentId, Long examId) {
+        return modelMapper.map(examStudentRepository.findByStudentIdAndExamId(studentId, examId), ExamAnswerDto.class);
+    }
+
+    @Override
+    public int grandExam(Double rate, Long examId, Long studentId, Boolean status, String json) {
+        return examStudentRepository.updateExamStudentReport(rate, examId, studentId, status, json);
     }
 }

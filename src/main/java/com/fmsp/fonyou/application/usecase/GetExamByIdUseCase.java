@@ -1,21 +1,18 @@
 package com.fmsp.fonyou.application.usecase;
 
-import com.fmsp.fonyou.application.dto.ExamListDto;
+import com.fmsp.fonyou.application.dto.ExamDto;
 import com.fmsp.fonyou.application.port.ExamService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class GetAllExamUseCase {
-
+public class GetExamByIdUseCase {
     private final ExamService examService;
 
-    public GetAllExamUseCase(ExamService examService) {
+    public GetExamByIdUseCase(ExamService examService) {
         this.examService = examService;
     }
 
-    public List<ExamListDto> getExamList(){
-        return examService.getExamList();
+    public ExamDto getExamById(Long examId){
+        return examService.getExamById(examId);
     }
 }
